@@ -14,18 +14,16 @@ int main()
 
     connect(clientSocket, (struct sockaddr *)&serverAddress, sizeof(serverAddress));
 
-    std::string message = "Hello from CPP client";
-    const char *msgChar = message.c_str();
     for (int i = 0; i < 3; i++)
     {
-        send(clientSocket, msgChar, sizeof(msgChar), 0);
+        send(clientSocket, "Hello from CPP client", sizeof("Hello from CPP client"), 0);
 
-        char buffer[1024] = {0};
+        char buffer[2048] = {0};
         recv(clientSocket, buffer, sizeof(buffer), 0);
 
         std::cout << "Message from server: " << buffer << std::endl;
     }
-    close(clientSocket);
+    // close(clientSocket);
 
     return 0;
 }
